@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Form</title>
+    <!--  add bootstrap resources  -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script defer th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script defer th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<nav th:replace="navbar :: navigation"></nav>
+
+
+<div class="container">
+    <form th:action="@{/student/add}" method="post" th:object="${dto}">
+        <div class="container">
+            <div class="card mt-4 mb-3 border-primary shadow-sm">
+                <h4 class="bg-light text-primary card-header">Register Form</h4>
+            </div>
+            <p>Please fill in this form to add a student</p>
+            <hr>
+
+            <label class="col-sm-3 control-label"><b>Name:</b></label>
+            <input type="text" class="form-control" th:field="*{name}" placeholder="Enter Name">
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
+            <label class="col-sm-3 control-label"><b>Email:</b></label>
+            <input type="text" class="form-control" th:field="*{email}" placeholder="Enter Email" required>
+            <p class="alert alert-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" ></p>
+
+            <label class="col-sm-3 control-label"><b>Course:</b></label>
+            <select class="form-control" th:field="*{course}">
+                <option th:value="Java" th:text="Java"></option>
+                <option th:value="Python" th:text="Python"></option>
+            </select>
+            <hr>
+            <button type="submit" class="btn btn-primary btn-block mb-3">Register</button>
+        </div>
+    </form>
+</div>
+
+
+<div th:insert="footer :: footer"></div>
+</body>
+</html>
